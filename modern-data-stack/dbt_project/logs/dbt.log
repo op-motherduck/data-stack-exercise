@@ -1,0 +1,31 @@
+[0m21:09:13.234155 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x112b097f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11474f750>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11474f890>]}
+
+
+============================== 21:09:13.237149 | 0aa8d92b-12d4-42b9-aa78-97d4e2ead236 ==============================
+[0m21:09:13.237149 [info ] [MainThread]: Running with dbt=1.10.6
+[0m21:09:13.237424 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/op/.dbt', 'debug': 'False', 'warn_error': 'None', 'log_path': 'logs', 'fail_fast': 'False', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt init datastack_transform', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m21:09:13.246381 [info ] [MainThread]: Creating dbt configuration folder at /Users/op/.dbt
+[0m21:09:13.247510 [debug] [MainThread]: Starter project path: /Users/op/Desktop/data-stack-exercise/data-stack-exercise/datastack-env/lib/python3.13/site-packages/dbt/include/starter_project
+[0m21:09:13.251134 [info ] [MainThread]: 
+Your new dbt project "datastack_transform" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m21:09:13.251304 [info ] [MainThread]: Setting up your profile.
+[0m21:09:33.114831 [info ] [MainThread]: Profile datastack_transform written to /Users/op/.dbt/profiles.yml using target's sample configuration. Once updated, you'll be able to start developing with dbt.
+[0m21:09:33.121849 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 19.926023, "process_in_blocks": "0", "process_kernel_time": 0.112576, "process_mem_max_rss": "115834880", "process_out_blocks": "0", "process_user_time": 0.573689}
+[0m21:09:33.122113 [debug] [MainThread]: Command `dbt init` succeeded at 21:09:33.122053 after 19.93 seconds
+[0m21:09:33.122329 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1147e7360>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x114b00950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1148367a0>]}
+[0m21:09:33.122540 [debug] [MainThread]: Flushing usage events
+[0m21:09:33.816127 [debug] [MainThread]: An error was encountered while trying to flush usage events

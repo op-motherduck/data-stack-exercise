@@ -1,0 +1,51 @@
+version: 2
+
+sources:
+  - name: raw
+    database: datastack
+    schema: public
+    tables:
+      - name: raw_crypto_prices
+        description: "Raw cryptocurrency price data from CoinCap"
+      - name: raw_github_events
+        description: "Raw GitHub public events data"
+      - name: raw_weather_data
+        description: "Raw weather data from OpenWeatherMap"
+
+models:
+  - name: stg_crypto_prices
+    description: "Staged cryptocurrency prices"
+    columns:
+      - name: id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: coin
+        description: "Cryptocurrency symbol"
+        tests:
+          - not_null
+      - name: price
+        description: "Price in USD"
+        tests:
+          - not_null
+
+  - name: crypto_analytics
+    description: "Hourly cryptocurrency analytics"
+    columns:
+      - name: coin
+        description: "Cryptocurrency symbol"
+      - name: hour
+        description: "Hour timestamp"
+      - name: pct_change
+        description: "Percentage change from previous hour"
+
+  - name: developer_activity
+    description: "Daily developer activity metrics"
+    columns:
+      - name: activity_date
+        description: "Date of activity"
+      - name: actor
+        description: "GitHub username"
+      - name: total_events
+        description: "Total number of events"
