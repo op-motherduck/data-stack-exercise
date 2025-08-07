@@ -11,7 +11,7 @@ producer = KafkaProducer(
 )
 
 async def crypto_stream():
-    uri = "wss://ws.coincap.io/prices?assets=bitcoin,ethereum,cardano,polkadot"
+    uri = "wss://wss.coincap.io/assets?apiKey=5eb798c305f3fbbc22ce557a1ce2f8fdb451dd323d30efffc1b1a0fefc20a189"
     
     async with websockets.connect(uri) as websocket:
         while True:
@@ -24,7 +24,7 @@ async def crypto_stream():
                     event = {
                         'coin': coin,
                         'price': float(price),
-                        'timestamp': datetime.utcnow().isoformat(),
+                        'timestamp': datetime.isoformat(),
                         'source': 'coincap'
                     }
                     
