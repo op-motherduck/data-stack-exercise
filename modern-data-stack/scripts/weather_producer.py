@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 
 # Get a free API key from: https://openweathermap.org/api
-API_KEY = "your_openweather_api_key"  # Replace with your key
+API_KEY = "4ebd6ca0678f10c623d75c2c57c83956"  # Replace with your key
 CITIES = ["London", "New York", "Tokyo", "Sydney", "Mumbai"]
 
 producer = KafkaProducer(
