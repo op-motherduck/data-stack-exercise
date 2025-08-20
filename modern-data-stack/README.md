@@ -91,6 +91,49 @@ graph TB
 - **Data**: All data sources (crypto, GitHub, weather)
 - **Output**: Data quality metrics, freshness alerts, validation results
 
+## 🕐 Automatic Scheduling
+
+The data stack includes automatic scheduling to keep your assets up-to-date:
+
+### **Schedule Configuration**
+- **Real-time Assets** (crypto, GitHub, weather): Every 5 minutes
+- **Data Quality Checks**: Every 15 minutes  
+- **Kafka Producers**: Every 30 minutes
+
+### **Managing Schedules**
+
+#### **Via Dagster UI**
+1. Open http://localhost:3000
+2. Navigate to the "Schedules" tab
+3. Enable/disable schedules as needed
+4. Monitor execution history and logs
+
+#### **Via Command Line**
+```bash
+# Check schedule configuration
+python check_schedules.py
+
+# Start a specific schedule
+dagster schedule up real_time_assets_schedule
+
+# Stop a schedule
+dagster schedule down real_time_assets_schedule
+
+# List all schedules
+dagster schedule list
+```
+
+#### **Schedule Files**
+- `schedules.py`: Defines different asset groups and their schedules
+- `definitions.py`: Imports and configures schedules in Dagster
+- `manage_schedules.py`: Script to monitor schedule status
+
+### **Customizing Schedules**
+Edit `dagster_project/datastack_orchestration/datastack_orchestration/schedules.py` to modify:
+- **Cron expressions**: Change timing (e.g., `"*/10 * * * *"` for every 10 minutes)
+- **Asset groups**: Add/remove assets from different schedules
+- **Schedule descriptions**: Update documentation
+
 ## 🚀 Quick Start
 
 ### Prerequisites

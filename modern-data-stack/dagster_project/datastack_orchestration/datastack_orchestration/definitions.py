@@ -3,6 +3,10 @@ from dagster_dbt import DbtCliResource
 import os
 
 from datastack_orchestration import assets  # noqa: TID252
+from datastack_orchestration.schedules import (
+    real_time_job, data_quality_job, kafka_job,
+    real_time_schedule, data_quality_schedule, kafka_schedule
+)
 
 all_assets = load_assets_from_modules([assets])
 
@@ -12,6 +16,8 @@ dbt_project_dir = os.path.join(current_dir, "..", "..", "..", "dbt_project", "da
 
 defs = Definitions(
     assets=all_assets,
+    jobs=[real_time_job, data_quality_job, kafka_job],
+    schedules=[real_time_schedule, data_quality_schedule, kafka_schedule],
     resources={
         "dbt": DbtCliResource(
             project_dir=dbt_project_dir,
