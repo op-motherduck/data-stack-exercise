@@ -1,0 +1,35 @@
+# Core Data Engineering Libraries
+dagster==1.6.0
+dagster-dbt==0.23.0
+dbt-core==1.7.0
+dbt-postgres==1.7.0
+
+# Database Connectors
+psycopg2-binary==2.9.9
+duckdb==0.9.2
+
+# Data Processing
+pandas==2.1.4
+numpy==1.24.3
+
+# Kafka
+kafka-python==2.0.2
+
+# HTTP Requests
+requests==2.31.0
+
+# Environment and Configuration
+python-dotenv==1.0.0
+
+# Data Quality and Validation
+great-expectations==0.17.23
+
+# Utilities
+click==8.1.7
+rich==13.7.0
+tabulate==0.9.0
+
+# Development and Testing
+pytest==7.4.3
+black==23.11.0
+flake8==6.1.0
