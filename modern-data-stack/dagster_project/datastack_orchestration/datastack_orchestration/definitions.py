@@ -1,9 +1,21 @@
 from dagster import Definitions, load_assets_from_modules
+from dagster_dbt import DbtCliResource
+import os
 
 from datastack_orchestration import assets  # noqa: TID252
 
 all_assets = load_assets_from_modules([assets])
 
+# Get the absolute path to the dbt project
+current_dir = os.path.dirname(os.path.abspath(__file__))
+dbt_project_dir = os.path.join(current_dir, "..", "..", "..", "dbt_project", "datastack_transform")
+
 defs = Definitions(
     assets=all_assets,
+    resources={
+        "dbt": DbtCliResource(
+            project_dir=dbt_project_dir,
+            profiles_dir=dbt_project_dir
+        )
+    }
 )

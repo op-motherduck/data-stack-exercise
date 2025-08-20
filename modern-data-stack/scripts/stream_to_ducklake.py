@@ -28,12 +28,18 @@ def get_ducklake_connection():
 def setup_ducklake_tables(conn):
     """Setup DuckLake tables for streaming data."""
     
-    # Create staging tables
+    # Create staging tables with new Coincheck structure
     conn.execute("""
         CREATE TABLE IF NOT EXISTS staging_crypto_prices (
             id INTEGER,
-            coin VARCHAR,
-            price DOUBLE,
+            type VARCHAR,
+            pair VARCHAR,
+            last DOUBLE,
+            bid DOUBLE,
+            ask DOUBLE,
+            high DOUBLE,
+            low DOUBLE,
+            volume DOUBLE,
             timestamp TIMESTAMP,
             source VARCHAR DEFAULT 'postgres_stream'
         )
@@ -91,11 +97,11 @@ def stream_data_to_ducklake():
         while True:
             current_time = datetime.now()
             
-            # Stream crypto prices
+            # Stream crypto prices with new structure
             try:
                 with pg_conn.cursor() as cur:
                     cur.execute("""
-                        SELECT id, coin, price, timestamp 
+                        SELECT id, type, pair, last, bid, ask, high, low, volume, timestamp 
                         FROM raw_crypto_prices 
                         WHERE timestamp > %s
                         ORDER BY timestamp
@@ -105,10 +111,11 @@ def stream_data_to_ducklake():
                     if crypto_data:
                         for row in crypto_data:
                             dk_conn.execute("""
-                                INSERT INTO staging_crypto_prices (id, coin, price, timestamp)
-                                VALUES (?, ?, ?, ?)
+                                INSERT INTO staging_crypto_prices 
+                                (id, type, pair, last, bid, ask, high, low, volume, timestamp)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                             """, row)
-                        last_crypto = crypto_data[-1][3]  # Update timestamp
+                        last_crypto = crypto_data[-1][9]  # Update timestamp (index 9 for timestamp)
                         print(f"Streamed {len(crypto_data)} crypto records")
             except Exception as e:
                 print(f"Error streaming crypto data: {e}")

@@ -72,9 +72,9 @@ def migrate_data():
     total_records = 0
     
     try:
-        # Migrate crypto prices
+        # Migrate crypto prices with new Coincheck structure
         crypto_query = """
-            SELECT id, coin, price, timestamp 
+            SELECT id, type, pair, last, bid, ask, high, low, volume, timestamp, source
             FROM raw_crypto_prices 
             ORDER BY timestamp
         """
@@ -124,6 +124,16 @@ def migrate_data():
         summary = dk_conn.execute("SELECT * FROM data_summary ORDER BY table_name").fetchdf()
         print("\nData Summary:")
         print(summary.to_string(index=False))
+        
+        # Show crypto data sample
+        print("\nCrypto Data Sample:")
+        crypto_sample = dk_conn.execute("""
+            SELECT pair, last, bid, ask, volume, timestamp 
+            FROM raw_crypto_prices 
+            ORDER BY timestamp DESC 
+            LIMIT 5
+        """).fetchdf()
+        print(crypto_sample.to_string(index=False))
         
     except Exception as e:
         print(f"Error during migration: {e}")

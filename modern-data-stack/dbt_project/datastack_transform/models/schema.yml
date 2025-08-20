@@ -6,7 +6,7 @@ sources:
     schema: public
     tables:
       - name: raw_crypto_prices
-        description: "Raw cryptocurrency price data from CoinCap"
+        description: "Raw cryptocurrency ticker data from Coincheck"
       - name: raw_github_events
         description: "Raw GitHub public events data"
       - name: raw_weather_data
@@ -14,31 +14,66 @@ sources:
 
 models:
   - name: stg_crypto_prices
-    description: "Staged cryptocurrency prices"
+    description: "Staged cryptocurrency ticker data with technical indicators"
     columns:
-      - name: id
-        description: "Primary key"
-        tests:
-          - unique
-          - not_null
-      - name: coin
-        description: "Cryptocurrency symbol"
+      - name: pair
+        description: "Trading pair (e.g., btc_jpy)"
         tests:
           - not_null
       - name: price
-        description: "Price in USD"
+        description: "Last traded price"
         tests:
           - not_null
+      - name: bid
+        description: "Best bid price"
+      - name: ask
+        description: "Best ask price"
+      - name: high
+        description: "24h high price"
+      - name: low
+        description: "24h low price"
+      - name: volume
+        description: "24h trading volume"
+      - name: spread
+        description: "Bid-ask spread"
+      - name: spread_percentage
+        description: "Bid-ask spread as percentage"
+      - name: ma_20
+        description: "20-period moving average"
+      - name: ma_50
+        description: "50-period moving average"
+      - name: daily_range
+        description: "Daily price range (high - low)"
+      - name: vwap
+        description: "Volume-weighted average price"
 
   - name: crypto_analytics
-    description: "Hourly cryptocurrency analytics"
+    description: "Hourly cryptocurrency analytics with spread and volume analysis"
     columns:
-      - name: coin
-        description: "Cryptocurrency symbol"
+      - name: pair
+        description: "Trading pair"
       - name: hour
         description: "Hour timestamp"
+      - name: avg_price
+        description: "Average price for the hour"
+      - name: avg_bid
+        description: "Average bid price for the hour"
+      - name: avg_ask
+        description: "Average ask price for the hour"
+      - name: avg_spread
+        description: "Average spread for the hour"
+      - name: avg_spread_percentage
+        description: "Average spread percentage for the hour"
+      - name: total_volume
+        description: "Total volume for the hour"
       - name: pct_change
         description: "Percentage change from previous hour"
+      - name: volume_pct_change
+        description: "Volume percentage change from previous hour"
+      - name: volatility_level
+        description: "Volatility level (High/Medium/Low)"
+      - name: volume_trend
+        description: "Volume trend (High/Medium/Low)"
 
   - name: developer_activity
     description: "Daily developer activity metrics"

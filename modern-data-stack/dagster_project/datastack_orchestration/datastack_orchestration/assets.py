@@ -1,9 +1,9 @@
 
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
-from dagster_dbt import dbt_assets, DbtCliResource
 import subprocess
 import pandas as pd
 import duckdb
+import psycopg2
 from datetime import datetime, timedelta
 import os
 import platform
@@ -14,12 +14,6 @@ def get_ducklake_path():
         return os.path.expanduser('~/modern-data-stack/data/ducklake/parquet')
     else:
         return os.path.abspath('data/ducklake/parquet')
-
-# Define dbt assets (update path for your system)
-@asset
-def datastack_dbt_assets(context: AssetExecutionContext):
-    """Run dbt build to transform data"""
-    yield from context.resources.dbt.cli(["build"], context=context).stream()
 
 @asset
 def start_kafka_producers(context):
@@ -45,35 +39,33 @@ def start_kafka_producers(context):
 @asset
 def crypto_price_summary(context) -> MaterializeResult:
     """Generate crypto price summary statistics"""
-    # Connect to DuckLake with proper path
-    conn = duckdb.connect()
-    conn.execute("INSTALL ducklake IF NOT EXISTS")
-    conn.execute("INSTALL postgres IF NOT EXISTS")
-    
-    base_path = get_ducklake_path()
-    conn.execute(f"""
-        ATTACH 'ducklake:host=localhost port=5433 user=ducklake 
-                password=ducklake123 database=ducklake_catalog' 
-        AS data_lake (DATA_PATH '{base_path}/')
-    """)
+    # Connect to PostgreSQL directly
+    conn = psycopg2.connect(
+        host="localhost",
+        port=5432,
+        database="datastack",
+        user="dataeng",
+        password="dataeng123"
+    )
     
     query = """
     SELECT 
-        coin,
+        pair as coin,
         COUNT(*) as data_points,
-        AVG(price) as avg_price,
-        MIN(price) as min_price,
-        MAX(price) as max_price,
-        STDDEV(price) as price_volatility
-    FROM data_lake.raw.crypto_prices
+        AVG(last) as avg_price,
+        MIN(last) as min_price,
+        MAX(last) as max_price,
+        STDDEV(last) as price_volatility
+    FROM raw_crypto_prices
     WHERE timestamp > CURRENT_TIMESTAMP - INTERVAL '24 hours'
-    GROUP BY coin
+    GROUP BY pair
     """
     
-    df = conn.execute(query).fetchdf()
+    df = pd.read_sql_query(query, conn)
+    conn.close()
     
     # Save to parquet for MotherDuck
-    output_path = os.path.join('data', 'crypto_summary.parquet')
+    output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'data', 'crypto_summary.parquet')
     df.to_parquet(output_path)
     
     return MaterializeResult(
@@ -86,7 +78,14 @@ def crypto_price_summary(context) -> MaterializeResult:
 @asset
 def developer_insights(context) -> MaterializeResult:
     """Analyze developer activity patterns"""
-    conn = duckdb.connect('datastack.duckdb')
+    # Connect to PostgreSQL instead of DuckDB
+    conn = psycopg2.connect(
+        host="localhost",
+        port=5432,
+        database="datastack",
+        user="dataeng",
+        password="dataeng123"
+    )
     
     query = """
     WITH top_developers AS (
@@ -104,10 +103,11 @@ def developer_insights(context) -> MaterializeResult:
     SELECT * FROM top_developers
     """
     
-    df = conn.execute(query).fetchdf()
+    df = pd.read_sql_query(query, conn)
+    conn.close()
     
     # Export for MotherDuck
-    df.to_parquet('data/developer_insights.parquet')
+    df.to_parquet(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'data', 'developer_insights.parquet'))
     
     return MaterializeResult(
         metadata={
@@ -119,12 +119,19 @@ def developer_insights(context) -> MaterializeResult:
 @asset
 def data_quality_checks(context):
     """Run data quality checks"""
-    conn = duckdb.connect('datastack.duckdb')
+    # Connect to PostgreSQL instead of DuckDB
+    conn = psycopg2.connect(
+        host="localhost",
+        port=5432,
+        database="datastack",
+        user="dataeng",
+        password="dataeng123"
+    )
     
     checks = {
         "crypto_nulls": """
             SELECT COUNT(*) FROM raw_crypto_prices 
-            WHERE price IS NULL OR coin IS NULL
+            WHERE last IS NULL OR pair IS NULL
         """,
         "github_duplicates": """
             SELECT COUNT(*) - COUNT(DISTINCT id) 
@@ -138,7 +145,7 @@ def data_quality_checks(context):
     
     results = {}
     for check_name, query in checks.items():
-        result = conn.execute(query).fetchone()[0]
+        result = pd.read_sql_query(query, conn).iloc[0, 0]
         results[check_name] = result
         
         if check_name == "crypto_nulls" and result > 0:
@@ -148,4 +155,50 @@ def data_quality_checks(context):
         elif check_name == "weather_freshness" and result > 6:
             context.log.warning(f"Weather data is {result} hours old")
     
+    conn.close()
     return results
+
+@asset
+def weather_analytics(context) -> MaterializeResult:
+    """Analyze weather patterns and trends"""
+    # Connect to PostgreSQL
+    conn = psycopg2.connect(
+        host="localhost",
+        port=5432,
+        database="datastack",
+        user="dataeng",
+        password="dataeng123"
+    )
+    
+    query = """
+    SELECT 
+        city,
+        COUNT(*) as data_points,
+        AVG(temperature) as avg_temperature,
+        MIN(temperature) as min_temperature,
+        MAX(temperature) as max_temperature,
+        AVG(humidity) as avg_humidity,
+        AVG(pressure) as avg_pressure,
+        MODE() WITHIN GROUP (ORDER BY weather) as most_common_weather,
+        MODE() WITHIN GROUP (ORDER BY description) as most_common_description
+    FROM raw_weather_data
+    WHERE timestamp > CURRENT_TIMESTAMP - INTERVAL '24 hours'
+    GROUP BY city
+    ORDER BY avg_temperature DESC
+    """
+    
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    # Save to parquet for MotherDuck
+    df.to_parquet(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 'data', 'weather_analytics.parquet'))
+    
+    return MaterializeResult(
+        metadata={
+            "num_cities": MetadataValue.int(int(len(df))),
+            "total_data_points": MetadataValue.int(int(df['data_points'].sum())),
+            "temperature_range": MetadataValue.text(f"{float(df['min_temperature'].min()):.1f}°C to {float(df['max_temperature'].max()):.1f}°C"),
+            "avg_temperature": MetadataValue.text(f"{float(df['avg_temperature'].mean()):.1f}°C"),
+            "weather_summary": MetadataValue.md(df.to_markdown())
+        }
+    )
