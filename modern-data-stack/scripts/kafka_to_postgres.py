@@ -14,12 +14,18 @@ conn = psycopg2.connect(
 
 # Create tables
 with conn.cursor() as cur:
-    # Crypto prices table
+    # Crypto ticker data table (updated for Coincheck structure)
     cur.execute("""
         CREATE TABLE IF NOT EXISTS raw_crypto_prices (
             id SERIAL PRIMARY KEY,
-            coin VARCHAR(50),
-            price DECIMAL(20, 8),
+            type VARCHAR(50),
+            pair VARCHAR(50),
+            last DECIMAL(20, 8),
+            bid DECIMAL(20, 8),
+            ask DECIMAL(20, 8),
+            high DECIMAL(20, 8),
+            low DECIMAL(20, 8),
+            volume DECIMAL(20, 8),
             timestamp TIMESTAMP,
             source VARCHAR(50),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -68,20 +74,54 @@ def consume_crypto_prices():
     for message in consumer:
         try:
             data = message.value
-            with conn.cursor() as cur:
-                cur.execute("""
-                    INSERT INTO raw_crypto_prices (coin, price, timestamp, source)
-                    VALUES (%s, %s, %s, %s)
-                """, (
-                    data['coin'],
-                    data['price'],
-                    data['timestamp'],
-                    data['source']
-                ))
-                conn.commit()
-                print(f"Inserted crypto price: {data['coin']} - ${data['price']}")
+            
+            # Handle new Coincheck ticker data structure
+            if data.get('type') == 'ticker':
+                with conn.cursor() as cur:
+                    cur.execute("""
+                        INSERT INTO raw_crypto_prices 
+                        (type, pair, last, bid, ask, high, low, volume, timestamp, source)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        data.get('type'),
+                        data.get('pair'),
+                        data.get('last'),
+                        data.get('bid'),
+                        data.get('ask'),
+                        data.get('high'),
+                        data.get('low'),
+                        data.get('volume'),
+                        data.get('timestamp'),
+                        data.get('source')
+                    ))
+                    conn.commit()
+                    print(f"Inserted crypto ticker: {data.get('pair')} - Last: {data.get('last')}, Bid: {data.get('bid')}, Ask: {data.get('ask')}")
+            
+            # Handle legacy data structure for backward compatibility
+            elif 'coin' in data and 'price' in data:
+                with conn.cursor() as cur:
+                    cur.execute("""
+                        INSERT INTO raw_crypto_prices 
+                        (type, pair, last, bid, ask, high, low, volume, timestamp, source)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        'legacy',
+                        data.get('coin'),
+                        data.get('price'),
+                        data.get('price'),  # Use price as both bid and ask for legacy data
+                        data.get('price'),
+                        data.get('price'),  # Use price as high and low for legacy data
+                        data.get('price'),
+                        0,  # No volume data in legacy format
+                        data.get('timestamp'),
+                        data.get('source', 'legacy')
+                    ))
+                    conn.commit()
+                    print(f"Inserted legacy crypto price: {data.get('coin')} - ${data.get('price')}")
+                    
         except Exception as e:
             print(f"Error inserting crypto data: {e}")
+            print(f"Data: {data}")
             conn.rollback()
 
 def consume_github_events():
@@ -147,6 +187,8 @@ def consume_weather_data():
             conn.rollback()
 
 if __name__ == "__main__":
+    print("Starting Kafka consumers for crypto, GitHub, and weather data...")
+    
     # Run consumers in separate threads
     threads = [
         threading.Thread(target=consume_crypto_prices),

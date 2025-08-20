@@ -1,0 +1,14 @@
+datastack_transform:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: dataeng
+      password: dataeng123
+      database: datastack
+      schema: public
+      threads: 4
+      keepalives_idle: 0
+      search_path: public
