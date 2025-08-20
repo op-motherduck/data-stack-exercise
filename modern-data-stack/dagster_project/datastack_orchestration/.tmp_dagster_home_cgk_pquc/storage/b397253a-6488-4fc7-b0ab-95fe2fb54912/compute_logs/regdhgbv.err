@@ -1,0 +1,7 @@
+[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91601 - LOGS_CAPTURED - Started capturing logs in process (pid: 91601).
+[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91601 - developer_insights - STEP_START - Started execution of step "developer_insights".
+/Users/op/Desktop/data-stack-exercise/data-stack-exercise/modern-data-stack/dagster_project/datastack_orchestration/datastack_orchestration/assets.py:106: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql_query(query, conn)
+[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91601 - developer_insights - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91601 - developer_insights - ASSET_MATERIALIZATION - Materialized value developer_insights.
+[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91601 - developer_insights - STEP_SUCCESS - Finished execution of step "developer_insights" in 122ms.
