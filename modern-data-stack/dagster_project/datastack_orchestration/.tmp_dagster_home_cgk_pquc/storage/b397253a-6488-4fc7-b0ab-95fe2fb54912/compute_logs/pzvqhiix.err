@@ -1,7 +1,0 @@
-[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91602 - LOGS_CAPTURED - Started capturing logs in process (pid: 91602).
-[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91602 - weather_analytics - STEP_START - Started execution of step "weather_analytics".
-/Users/op/Desktop/data-stack-exercise/data-stack-exercise/modern-data-stack/dagster_project/datastack_orchestration/datastack_orchestration/assets.py:190: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
-  df = pd.read_sql_query(query, conn)
-[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91602 - weather_analytics - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
-[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91602 - weather_analytics - ASSET_MATERIALIZATION - Materialized value weather_analytics.
-[32m2025-08-20 11:45:09 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - b397253a-6488-4fc7-b0ab-95fe2fb54912 - 91602 - weather_analytics - STEP_SUCCESS - Finished execution of step "weather_analytics" in 122ms.

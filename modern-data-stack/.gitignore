@@ -1,0 +1,78 @@
+# Environment files with credentials
+.env
+.env.local
+.env.production
+.env.staging
+
+# AWS credentials and config
+s3_config.json
+aws_credentials.json
+.aws/
+
+# Data files (can be large)
+data/*.parquet
+data/ducklake/parquet/
+*.parquet
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+datastack-env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dagster
+dagster_home/
+.tmp_dagster_home_*/
+*.duckdb
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.temp
+
+# Large data files
+host=localhost*
+ducklake_catalog*
+
+# dbt
+dbt_project/datastack_transform/target/
+dbt_project/datastack_transform/logs/
+dbt_project/logs/
