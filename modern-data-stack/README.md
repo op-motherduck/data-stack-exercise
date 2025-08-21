@@ -1,6 +1,6 @@
 # Modern Data Stack Exercise
 
-A comprehensive modern data stack implementation featuring real-time streaming, data transformation, analytics, and orchestration.
+A comprehensive modern data stack implementation featuring real-time streaming, data transformation, analytics, and orchestration. This project has been optimized for maintainability with consolidated testing, streamlined management tools, and enhanced security.
 
 ## 🏗️ Architecture Overview
 
@@ -110,8 +110,8 @@ The data stack includes automatic scheduling to keep your assets up-to-date:
 
 #### **Via Command Line**
 ```bash
-# Check schedule configuration
-python check_schedules.py
+# Monitor schedule status and recent runs
+python manage_schedules.py
 
 # Start a specific schedule
 dagster schedule up real_time_assets_schedule
@@ -124,15 +124,77 @@ dagster schedule list
 ```
 
 #### **Schedule Files**
-- `schedules.py`: Defines different asset groups and their schedules
-- `definitions.py`: Imports and configures schedules in Dagster
-- `manage_schedules.py`: Script to monitor schedule status
+- `dagster_project/datastack_orchestration/datastack_orchestration/schedules.py`: Defines different asset groups and their schedules
+- `dagster_project/datastack_orchestration/datastack_orchestration/definitions.py`: Imports and configures schedules in Dagster
+- `manage_schedules.py`: Script to monitor schedule status and recent runs
 
 ### **Customizing Schedules**
 Edit `dagster_project/datastack_orchestration/datastack_orchestration/schedules.py` to modify:
 - **Cron expressions**: Change timing (e.g., `"*/10 * * * *"` for every 10 minutes)
 - **Asset groups**: Add/remove assets from different schedules
 - **Schedule descriptions**: Update documentation
+
+## 📁 Project Structure
+
+After cleanup, the project has a streamlined structure:
+
+```
+modern-data-stack/
+├── 📁 Core Infrastructure
+│   ├── docker-compose.yml          # Docker services
+│   ├── start_stack.sh              # Stack startup
+│   └── stop_stack.sh               # Stack shutdown
+│
+├── 📁 Data Orchestration
+│   └── dagster_project/            # Dagster assets & schedules
+│
+├── 📁 Data Transformation
+│   └── dbt_project/                # dbt models & transformations
+│
+├── 📁 Data Storage
+│   ├── data/                       # Generated parquet files
+│   ├── postgres/                   # PostgreSQL data
+│   └── kafka/                      # Kafka configuration
+│
+├── 📁 Scripts & Tools
+│   ├── scripts/                    # Data producers & utilities
+│   ├── test_assets.py              # ✅ Consolidated testing
+│   └── manage_schedules.py         # ✅ Schedule management
+│
+├── 📁 Documentation
+│   ├── README.md                   # Main documentation
+│   └── CLEANUP_SUMMARY.md          # Cleanup documentation
+│
+└── 📁 Configuration
+    ├── .gitignore                  # ✅ Security protection
+    └── requirements.txt            # Python dependencies
+```
+
+## 🧪 Testing Workflow
+
+### **Comprehensive Asset Testing**
+```bash
+# Test all assets at once
+python test_assets.py
+
+# Test specific assets individually
+python test_assets.py crypto      # Test crypto price summary
+python test_assets.py developer   # Test developer insights  
+python test_assets.py weather     # Test weather analytics
+python test_assets.py quality     # Test data quality checks
+```
+
+### **Schedule Management**
+```bash
+# Monitor all schedules and recent runs
+python manage_schedules.py
+```
+
+### **Asset Status**
+The test script provides detailed feedback:
+- ✅ **Success**: Asset materialized successfully with metadata
+- ❌ **Failure**: Detailed error messages for debugging
+- 📊 **Summary**: Overall success rate and individual asset status
 
 ## 🚀 Quick Start
 
@@ -221,6 +283,21 @@ cd dbt_project/datastack_transform
 dbt run
 ```
 
+### **Step 7: Testing and Validation**
+```bash
+# Test all assets
+python test_assets.py
+
+# Test specific assets
+python test_assets.py crypto      # Test crypto price summary
+python test_assets.py developer   # Test developer insights
+python test_assets.py weather     # Test weather analytics
+python test_assets.py quality     # Test data quality checks
+
+# Monitor schedules
+python manage_schedules.py
+```
+
 ## 📈 Monitoring and Observability
 
 ### **Real-time Monitoring**
@@ -292,6 +369,11 @@ docker-compose logs postgres
 
 # View Dagster logs
 dagster dev --log-level DEBUG
+
+# Test individual components
+python test_assets.py              # Test all assets
+python test_assets.py crypto       # Test specific asset
+python manage_schedules.py         # Check schedule status
 ```
 
 ## 📚 Learning Resources
@@ -313,8 +395,15 @@ dagster dev --log-level DEBUG
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+4. Add tests using the consolidated `test_assets.py` script
+5. Ensure your changes work with the streamlined project structure
+6. Submit a pull request
+
+### **Development Guidelines**
+- Use the consolidated testing workflow: `python test_assets.py`
+- Follow the established project structure
+- Update documentation if adding new components
+- Check `CLEANUP_SUMMARY.md` for project organization guidelines
 
 ## 📄 License
 

@@ -1,7 +1,0 @@
-[32m2025-08-20 11:40:05 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - 23bb947a-4c9f-403e-8415-1e60af7133fd - 91421 - LOGS_CAPTURED - Started capturing logs in process (pid: 91421).
-[32m2025-08-20 11:40:05 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - 23bb947a-4c9f-403e-8415-1e60af7133fd - 91421 - crypto_price_summary - STEP_START - Started execution of step "crypto_price_summary".
-/Users/op/Desktop/data-stack-exercise/data-stack-exercise/modern-data-stack/dagster_project/datastack_orchestration/datastack_orchestration/assets.py:64: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
-  df = pd.read_sql_query(query, conn)
-[32m2025-08-20 11:40:05 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - 23bb947a-4c9f-403e-8415-1e60af7133fd - 91421 - crypto_price_summary - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
-[32m2025-08-20 11:40:05 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - 23bb947a-4c9f-403e-8415-1e60af7133fd - 91421 - crypto_price_summary - ASSET_MATERIALIZATION - Materialized value crypto_price_summary.
-[32m2025-08-20 11:40:05 -0400[0m - dagster - [34mDEBUG[0m - real_time_assets_job - 23bb947a-4c9f-403e-8415-1e60af7133fd - 91421 - crypto_price_summary - STEP_SUCCESS - Finished execution of step "crypto_price_summary" in 130ms.
