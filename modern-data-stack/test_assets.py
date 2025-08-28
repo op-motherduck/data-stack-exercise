@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# DAGSTER ASSETS TESTING UTILITY
+# =============================================================================
+# Purpose: Comprehensive testing framework for all Dagster assets:
+#   - Tests individual assets in isolation for debugging
+#   - Validates asset functionality and data processing logic
+#   - Provides detailed error reporting and success metrics
+#   - Supports testing specific assets or all assets together
+#   - Ensures data pipeline reliability and correctness
+# 
+# This script is used for development, debugging, and validation
+# of the data processing assets before deployment.
+# =============================================================================
 """
 Comprehensive test script for all Dagster assets
 """

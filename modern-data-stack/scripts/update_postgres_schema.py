@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# POSTGRESQL SCHEMA UPDATE UTILITY
+# =============================================================================
+# Purpose: Updates PostgreSQL database schema for new data structures:
+#   - Migrates table schemas to accommodate new data formats
+#   - Handles schema changes for Coincheck API data structure
+#   - Provides safe table recreation with proper data types
+#   - Validates schema changes and provides detailed reporting
+#   - Ensures database compatibility with updated data sources
+# 
+# This script is used when external APIs change their data format
+# or when new data sources require different table structures.
+# =============================================================================
 """
 Script to update PostgreSQL table schema for new Coincheck data structure.
 """

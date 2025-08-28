@@ -1,3 +1,15 @@
+# =============================================================================
+# DAGSTER SCHEDULES AND JOB DEFINITIONS
+# =============================================================================
+# Purpose: Defines automated execution schedules for data processing:
+#   - real_time_assets: Analytics assets that run every 5 minutes
+#   - data_quality_checks: Data validation that runs every 15 minutes
+#   - kafka_producers: Stream management that runs every 30 minutes
+# 
+# These schedules ensure continuous data processing and monitoring
+# without manual intervention, providing real-time insights and alerts.
+# =============================================================================
+
 from dagster import ScheduleDefinition, define_asset_job, AssetSelection
 
 # Define different asset groups for different schedules

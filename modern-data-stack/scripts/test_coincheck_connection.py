@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# COINCHECK API CONNECTION TEST
+# =============================================================================
+# Purpose: Tests connectivity and functionality of the Coincheck REST API:
+#   - Verifies API endpoint accessibility and response format
+#   - Tests multiple cryptocurrency trading pairs
+#   - Validates data structure and content for debugging
+#   - Provides detailed error reporting for connection issues
+#   - Helps diagnose problems before running the full crypto producer
+# 
+# This script is used for troubleshooting and validating the external
+# data source before integrating it into the main data pipeline.
+# =============================================================================
 """
 Test script to verify Coincheck REST API connection.
 This helps debug connection issues before running the full producer.

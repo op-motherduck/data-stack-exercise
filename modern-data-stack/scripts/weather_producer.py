@@ -1,3 +1,17 @@
+# =============================================================================
+# WEATHER DATA PRODUCER
+# =============================================================================
+# Purpose: Streams weather data from OpenWeatherMap API to Kafka:
+#   - Fetches current weather conditions for major cities worldwide
+#   - Publishes structured weather events to Kafka topic 'weather_data'
+#   - Includes temperature, humidity, pressure, wind, and weather conditions
+#   - Implements error handling and API rate limiting
+#   - Updates weather data every 5 minutes for real-time monitoring
+# 
+# This producer feeds the weather analytics pipeline and provides
+# environmental data for city-based weather pattern analysis.
+# =============================================================================
+
 import requests
 import json
 from kafka import KafkaProducer

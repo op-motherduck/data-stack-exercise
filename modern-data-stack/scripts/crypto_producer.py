@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# CRYPTOCURRENCY DATA PRODUCER
+# =============================================================================
+# Purpose: Streams real-time cryptocurrency price data from Coincheck API to Kafka:
+#   - Fetches ticker data for multiple trading pairs (BTC, ETH, XRP, etc.)
+#   - Publishes structured events to Kafka topic 'crypto_prices'
+#   - Includes price, volume, bid/ask, and timestamp information
+#   - Implements error handling and reconnection logic
+#   - Respects API rate limits with appropriate delays
+# 
+# This producer feeds the real-time cryptocurrency analytics pipeline
+# and provides data for price trend analysis and monitoring.
+# =============================================================================
 """
 Crypto data producer using Coincheck REST API.
 Streams cryptocurrency ticker data to Kafka.

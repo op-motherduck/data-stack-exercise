@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# POSTGRESQL TO DUCKLAKE DATA MIGRATION
+# =============================================================================
+# Purpose: Performs one-time migration of existing data from PostgreSQL to DuckLake:
+#   - Migrates all historical data from PostgreSQL tables to DuckLake
+#   - Creates parquet files for analytics and cloud storage
+#   - Generates summary statistics and data lineage information
+#   - Handles different data structures and formats
+#   - Provides detailed migration reporting and validation
+# 
+# This script is used for initial data lake population and can be run
+# periodically to sync historical data between systems.
+# =============================================================================
 """
 One-time migration script to move existing data from PostgreSQL to DuckLake.
 """

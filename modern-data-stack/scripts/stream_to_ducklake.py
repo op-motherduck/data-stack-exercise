@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+# =============================================================================
+# REAL-TIME POSTGRESQL TO DUCKLAKE STREAMING
+# =============================================================================
+# Purpose: Continuously streams data from PostgreSQL to DuckLake lakehouse:
+#   - Monitors PostgreSQL tables for new data in real-time
+#   - Streams crypto prices, GitHub events, and weather data
+#   - Creates staging tables in DuckLake for data processing
+#   - Exports data to parquet files every 5 minutes for analytics
+#   - Implements incremental processing with timestamp tracking
+#   - Provides error handling and connection management
+# 
+# This script enables real-time data lake functionality by continuously
+# moving data from the operational database to the analytics lakehouse.
+# =============================================================================
 """
 Real-time streaming script that continuously moves data from PostgreSQL to DuckLake.
 """

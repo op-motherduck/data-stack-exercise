@@ -1,3 +1,17 @@
+# =============================================================================
+# MOTHERDUCK COLLABORATIVE ANALYTICS WORKSPACE
+# =============================================================================
+# Purpose: Sets up collaborative analytics environment in MotherDuck cloud:
+#   - Creates role-based schemas for different user types (engineers, analysts, executives)
+#   - Establishes curated views and dashboards for each role
+#   - Implements parameterized reports and macros for flexible analysis
+#   - Provides KPI dashboards and trend analysis capabilities
+#   - Enables team collaboration on data analytics and insights
+# 
+# This script creates a cloud-based collaborative workspace where
+# different stakeholders can access appropriate data views and analytics.
+# =============================================================================
+
 import duckdb
 import os
 

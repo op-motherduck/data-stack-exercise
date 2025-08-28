@@ -1,3 +1,17 @@
+# =============================================================================
+# DUCKLAKE TO MOTHERDUCK CLOUD SYNC
+# =============================================================================
+# Purpose: Synchronizes local DuckLake data to MotherDuck cloud platform:
+#   - Connects local lakehouse to cloud-based MotherDuck instance
+#   - Creates materialized views and dashboards in the cloud
+#   - Implements real-time analytics and reporting capabilities
+#   - Provides collaborative access to data across team members
+#   - Enables cloud-based data sharing and analysis
+# 
+# This script bridges the local data lake with cloud analytics
+# and enables team collaboration on data insights.
+# =============================================================================
+
 import duckdb
 import os
 

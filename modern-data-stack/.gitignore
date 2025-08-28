@@ -1,3 +1,17 @@
+# =============================================================================
+# GIT IGNORE CONFIGURATION
+# =============================================================================
+# Purpose: Specifies files and directories to be ignored by Git version control:
+#   - Protects sensitive credentials and environment files
+#   - Excludes large data files and generated artifacts
+#   - Ignores temporary files and cache directories
+#   - Prevents accidental commit of development artifacts
+#   - Maintains clean repository by excluding build outputs
+# 
+# This file ensures security and keeps the repository focused
+# on source code and configuration rather than generated content.
+# =============================================================================
+
 # Environment files with credentials
 .env
 .env.local

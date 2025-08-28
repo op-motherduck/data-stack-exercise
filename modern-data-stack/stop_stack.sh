@@ -1,4 +1,17 @@
 #!/bin/bash
+# =============================================================================
+# MODERN DATA STACK SHUTDOWN SCRIPT
+# =============================================================================
+# Purpose: Gracefully shuts down all components of the modern data stack including:
+#   - Data producers (crypto, GitHub, weather)
+#   - Data consumers and streaming processes
+#   - Dagster orchestration platform
+#   - Docker services (Kafka, PostgreSQL, Zookeeper, Kafka UI)
+#   - Force cleanup of any remaining processes
+# 
+# This script ensures clean shutdown of all stack components and prevents
+# resource conflicts when restarting the stack.
+# =============================================================================
 
 echo "Stopping Modern Data Stack..."
 

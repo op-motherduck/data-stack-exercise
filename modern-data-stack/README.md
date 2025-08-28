@@ -1,3 +1,17 @@
+# =============================================================================
+# MODERN DATA STACK PROJECT DOCUMENTATION
+# =============================================================================
+# Purpose: Comprehensive documentation for the modern data stack implementation:
+#   - Complete architecture overview and technology stack
+#   - Step-by-step setup and implementation instructions
+#   - Data pipeline workflow and component descriptions
+#   - Testing procedures and troubleshooting guides
+#   - Configuration details and operational procedures
+# 
+# This README serves as the primary reference for understanding,
+# setting up, and operating the entire data stack project.
+# =============================================================================
+
 # Modern Data Stack Exercise
 
 A comprehensive modern data stack implementation featuring real-time streaming, data transformation, analytics, and orchestration. This project has been optimized for maintainability with consolidated testing, streamlined management tools, and enhanced security.

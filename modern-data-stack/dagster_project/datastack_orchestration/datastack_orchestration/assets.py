@@ -1,3 +1,16 @@
+# =============================================================================
+# DAGSTER ASSETS FOR MODERN DATA STACK
+# =============================================================================
+# Purpose: Defines all data processing assets for the Dagster orchestration:
+#   - start_kafka_producers: Manages data streaming from external sources
+#   - crypto_price_summary: Analyzes cryptocurrency price trends and statistics
+#   - developer_insights: Processes GitHub activity data for developer analytics
+#   - data_quality_checks: Validates data integrity across all sources
+#   - weather_analytics: Analyzes weather patterns and city-based statistics
+# 
+# These assets represent the core data transformations and analytics
+# that run on a schedule to provide real-time insights.
+# =============================================================================
 
 from dagster import asset, AssetExecutionContext, MaterializeResult, MetadataValue
 import subprocess

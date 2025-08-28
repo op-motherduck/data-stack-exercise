@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# DUCKLAKE METADATA STORE SETUP
+# =============================================================================
+# Purpose: Initializes DuckLake metadata store and configuration:
+#   - Creates necessary directories for parquet file storage
+#   - Establishes connection to DuckLake metadata database
+#   - Creates metadata tables for data lineage tracking
+#   - Sets up data quality metrics and pipeline monitoring tables
+#   - Initializes sample data for testing and validation
+# 
+# This script prepares the lakehouse infrastructure for data storage
+# and provides metadata management for the analytics pipeline.
+# =============================================================================
 """
 Setup script for DuckLake metadata store and initial configuration.
 """

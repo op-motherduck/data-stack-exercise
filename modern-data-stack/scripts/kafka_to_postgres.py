@@ -1,3 +1,17 @@
+# =============================================================================
+# KAFKA TO POSTGRESQL DATA CONSUMER
+# =============================================================================
+# Purpose: Consumes streaming data from Kafka topics and stores in PostgreSQL:
+#   - Consumes crypto_prices, github_events, and weather_data topics
+#   - Creates and maintains database tables for raw data storage
+#   - Handles multiple data formats and legacy compatibility
+#   - Implements error handling and transaction management
+#   - Runs multiple consumers in parallel threads for efficiency
+# 
+# This consumer bridges the streaming layer (Kafka) with the storage layer
+# (PostgreSQL) and provides the foundation for data analytics.
+# =============================================================================
+
 import json
 import psycopg2
 from kafka import KafkaConsumer

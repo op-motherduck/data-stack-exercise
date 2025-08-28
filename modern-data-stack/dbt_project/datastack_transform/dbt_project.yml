@@ -1,3 +1,16 @@
+# =============================================================================
+# DBT PROJECT CONFIGURATION
+# =============================================================================
+# Purpose: Configures the dbt (data build tool) project for data transformations:
+#   - Defines project name, version, and profile settings
+#   - Specifies file paths for models, analyses, tests, and macros
+#   - Configures model materialization strategies (views, tables)
+#   - Sets up clean targets and package management
+#   - Establishes project structure for data transformation workflows
+# 
+# This file is the main configuration for the dbt data transformation
+# pipeline that processes raw data into analytics-ready models.
+# =============================================================================
 
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's

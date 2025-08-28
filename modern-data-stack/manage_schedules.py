@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+# =============================================================================
+# DAGSTER SCHEDULE MANAGEMENT AND MONITORING
+# =============================================================================
+# Purpose: Manages and monitors Dagster schedules and pipeline execution:
+#   - Retrieves schedule status and configuration via GraphQL API
+#   - Monitors recent pipeline runs and their execution status
+#   - Provides detailed reporting on schedule performance
+#   - Validates Dagster service availability and connectivity
+#   - Offers operational visibility into automated data processing
+# 
+# This script provides operational oversight of the automated
+# data pipeline execution and helps identify scheduling issues.
+# =============================================================================
 """
 Script to manage and monitor Dagster schedules
 """

@@ -1,3 +1,17 @@
+# =============================================================================
+# DAGSTER DEFINITIONS AND CONFIGURATION
+# =============================================================================
+# Purpose: Configures the Dagster application with:
+#   - Asset definitions loaded from the assets module
+#   - Job definitions for different processing workflows
+#   - Schedule definitions for automated execution
+#   - Resource configurations (dbt integration)
+#   - Path configurations for external tools
+# 
+# This file serves as the main entry point for the Dagster application
+# and defines how all components interact and execute.
+# =============================================================================
+
 from dagster import Definitions, load_assets_from_modules
 from dagster_dbt import DbtCliResource
 import os

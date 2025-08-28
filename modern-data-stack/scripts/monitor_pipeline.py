@@ -1,3 +1,17 @@
+# =============================================================================
+# DATA PIPELINE MONITORING AND HEALTH CHECKS
+# =============================================================================
+# Purpose: Monitors the health and performance of the data pipeline:
+#   - Tracks data freshness across all data sources (crypto, GitHub, weather)
+#   - Monitors record counts and latest timestamps for each source
+#   - Provides real-time pipeline status and alerting capabilities
+#   - Checks data flow continuity and identifies potential issues
+#   - Runs continuous monitoring with configurable check intervals
+# 
+# This script provides operational visibility into the data pipeline
+# and helps identify and resolve data flow issues quickly.
+# =============================================================================
+
 import psycopg2
 import time
 from datetime import datetime, timedelta

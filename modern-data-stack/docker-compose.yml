@@ -1,3 +1,16 @@
+# =============================================================================
+# DOCKER COMPOSE CONFIGURATION FOR MODERN DATA STACK
+# =============================================================================
+# Purpose: Defines all Docker services required for the modern data stack:
+#   - Zookeeper: Coordination service for Kafka
+#   - Kafka: Distributed streaming platform for real-time data
+#   - PostgreSQL: Primary database for raw data storage
+#   - PostgreSQL (DuckLake): Metadata store for DuckLake lakehouse
+#   - Kafka UI: Web interface for monitoring Kafka topics and messages
+# 
+# This configuration provides a complete containerized environment for
+# streaming data processing, storage, and analytics.
+# =============================================================================
 version: '3.8'
 services:
   zookeeper:

@@ -1,4 +1,19 @@
 #!/bin/bash
+# =============================================================================
+# MODERN DATA STACK STARTUP SCRIPT
+# =============================================================================
+# Purpose: Orchestrates the complete startup of the modern data stack including:
+#   - Docker services (Kafka, PostgreSQL, Zookeeper, Kafka UI)
+#   - Virtual environment activation
+#   - DuckLake initialization and streaming
+#   - Dagster orchestration platform
+#   - Data producers (crypto, GitHub, weather)
+#   - Kafka consumers and data pipelines
+#   - Optional MotherDuck cloud sync
+# 
+# This script is the main entry point for starting the entire data stack
+# and ensures all components are properly initialized and connected.
+# =============================================================================
 
 echo "Starting Modern Data Stack with DuckLake..."
 
@@ -21,13 +36,32 @@ echo "Waiting for services to start..."
 sleep 30
 
 # Activate virtual environment if it exists
-if [ -d "datastack-env" ]; then
+if [ -d "../datastack-env" ]; then
+    source ../datastack-env/bin/activate
+    echo "✅ Virtual environment activated"
+elif [ -d "datastack-env" ]; then
     source datastack-env/bin/activate
+    echo "✅ Virtual environment activated"
+else
+    echo "❌ Virtual environment not found. Please ensure datastack-env exists."
+    echo "   Expected locations: ../datastack-env or ./datastack-env"
+    exit 1
 fi
+
+# Verify Python is available
+if ! command -v python &> /dev/null; then
+    echo "❌ Python not found. Please ensure the virtual environment is activated."
+    exit 1
+fi
+echo "✅ Python found: $(which python)"
 
 # Initialize DuckLake
 echo "Initializing DuckLake..."
-python scripts/setup_ducklake.py
+if ! python scripts/setup_ducklake.py; then
+    echo "❌ Failed to initialize DuckLake"
+    exit 1
+fi
+echo "✅ DuckLake initialized successfully"
 
 # Start Kafka consumers
 echo "Starting Kafka consumers..."
@@ -45,6 +79,7 @@ cd dagster_project/datastack_orchestration
 dagster dev &
 DAGSTER_PID=$!
 cd ../..
+echo "✅ Dagster started successfully"
 
 # Start data producers
 echo "Starting data producers..."

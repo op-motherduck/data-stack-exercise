@@ -1,3 +1,17 @@
+# =============================================================================
+# DBT MODEL SCHEMA AND TESTING CONFIGURATION
+# =============================================================================
+# Purpose: Defines data models, sources, and testing requirements for dbt:
+#   - Configures source tables and their descriptions
+#   - Defines staging and analytics models with column specifications
+#   - Implements data quality tests (not_null, relationships, etc.)
+#   - Documents data lineage and business logic
+#   - Establishes testing framework for data validation
+# 
+# This file ensures data quality, documentation, and testing
+# across all data transformation models in the dbt project.
+# =============================================================================
+
 version: 2
 
 sources:

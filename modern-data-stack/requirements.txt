@@ -1,3 +1,19 @@
+# =============================================================================
+# PYTHON DEPENDENCIES FOR MODERN DATA STACK
+# =============================================================================
+# Purpose: Defines all Python packages required for the data stack components:
+#   - Core Data Engineering: Dagster (orchestration), dbt (transformations)
+#   - Database Connectors: PostgreSQL and DuckDB connectivity
+#   - Data Processing: Pandas and NumPy for data manipulation
+#   - Streaming: Kafka Python client for message processing
+#   - HTTP/API: Requests for external data sources
+#   - Configuration: Environment variable management
+#   - Data Quality: Great Expectations for validation
+#   - Utilities: CLI tools, formatting, and development tools
+# 
+# This file ensures consistent dependency versions across all environments.
+# =============================================================================
+
 # Core Data Engineering Libraries
 dagster==1.6.0
 dagster-dbt==0.23.0

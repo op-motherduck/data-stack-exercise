@@ -1,3 +1,17 @@
+# =============================================================================
+# GITHUB ACTIVITY DATA PRODUCER
+# =============================================================================
+# Purpose: Streams GitHub public events data to Kafka for developer analytics:
+#   - Fetches real-time GitHub public events from GitHub API
+#   - Publishes structured events to Kafka topic 'github_events'
+#   - Tracks developer activity, repository events, and user actions
+#   - Implements deduplication to avoid processing same events
+#   - Respects GitHub API rate limits with appropriate delays
+# 
+# This producer feeds the developer activity analytics pipeline
+# and provides insights into open source development trends.
+# =============================================================================
+
 import requests
 import json
 import time

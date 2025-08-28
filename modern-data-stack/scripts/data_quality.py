@@ -1,3 +1,17 @@
+# =============================================================================
+# DATA QUALITY VALIDATION WITH GREAT EXPECTATIONS
+# =============================================================================
+# Purpose: Implements data quality checks using Great Expectations framework:
+#   - Validates data completeness, accuracy, and consistency
+#   - Checks for null values, data ranges, and expected values
+#   - Validates cryptocurrency price data against business rules
+#   - Generates validation reports and alerts for data issues
+#   - Integrates with the data pipeline for automated quality monitoring
+# 
+# This script ensures data reliability and helps maintain data integrity
+# across the entire data stack.
+# =============================================================================
+
 import great_expectations as gx
 import pandas as pd
 import os
